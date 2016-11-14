@@ -21,10 +21,8 @@ def deletionDataParser(file = ''):
             genes = line.strip().replace('"', '').split('\t')
             genes.pop(0)
         elif line.rstrip():
-            print(line)
             geneLine = line.strip().split('\t')
             thisKnockout = geneLine.pop(0).replace('"', '')
-            print(geneLine)
             for i, gene in enumerate(genes):
                 inputData[(thisKnockout, gene)] = geneLine[i]
 
