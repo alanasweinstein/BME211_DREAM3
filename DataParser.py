@@ -32,4 +32,4 @@ def deletionDataParser(file = ''):
                 else:
                     inputData[(thisKnockout[:-5], gene)] = geneLine[i]
 
-    return inputData
+    return inputData, genes
