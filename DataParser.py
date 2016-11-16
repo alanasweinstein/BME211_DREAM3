@@ -14,6 +14,7 @@ def deletionDataParser(file = ''):
         f = open(file)
 
     inputData = dict() #key = (knockout, gene), value = gene expression level | knockout
+                    #or wt, gene for wild type strain
     genes = list() #genes extracted from file
 
     for i, line in enumerate(f):
@@ -21,10 +22,14 @@ def deletionDataParser(file = ''):
             genes = line.strip().replace('"', '').split('\t')
             genes.pop(0)
         elif line.rstrip():
+            #print(line)
             geneLine = line.strip().split('\t')
             thisKnockout = geneLine.pop(0).replace('"', '')
+            print(geneLine)
             for i, gene in enumerate(genes):
-                inputData[(thisKnockout, gene)] = geneLine[i]
+                if thisKnockout == 'wt':
+                    inputData[(thisKnockout, gene)] = geneLine[i]
+                else:
+                    inputData[(thisKnockout[:-5], gene)] = geneLine[i]
 
     return inputData
-
